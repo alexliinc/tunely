@@ -125,21 +125,40 @@ function renderAlbum(album) {
     "                        <h4 class='inline-header'>Released date:</h4>" +
     "                        <span class='album-releaseDate'>" + album.releaseDate + "</span>" +
     "                      </li>" +
-    "                    </ul>" +
-    "                  </div>" +
-    "                </div>" +
-    "                <!-- end of album internal row -->" +
+    // buildSongsHtml
+    buildSongsHtml(album.songs)
+  "                    </ul>" +
+  "                  </div>" +
+  "                </div>" +
+  "                <!-- end of album internal row -->" +
 
-    "              </div>" + // end of panel-body
+  "              </div>" + // end of panel-body
 
-    "              <div class='panel-footer'>" +
-    "              </div>" +
+  "              <div class='panel-footer'>" +
+  "              </div>" +
 
-    "            </div>" +
-    "          </div>" +
-    "          <!-- end one album -->";
+  "            </div>" +
+  "          </div>" +
+  "          <!-- end one album -->";
 
   // render to the page with jQuery
   $('#albums').append(albumHtml);
 
+}
+
+function buildSongsHtml(songs) {
+  var songText = "	– ";
+  songs.forEach(function(song) {
+    songText = songText + "(" + song.trackNumber + ") " + song.name + " – ";
+  });
+  var songsHtml = "<li class='list-group-item'>" + "<h4 class='inline-header'>Songs:</h4>" + "<span>" + songText + "</span>" + "</li>";
+  return songsHtml;
+}
+
+// this function will be called when someone clicks a button to create a new song
+//   it has to determine what album (in the DB) the song will go to
+function handleNewSongButtonClick() {
+  // get the current album's id from the row the button is in
+  // set the album-id data attribute on the modal (jquery)
+  // display the modal
 }
