@@ -65,8 +65,34 @@ app.post('/api/albums', function album_index(req, res) {
     console.log(album);
     res.json(album);
   });
-})
+});
 
+// GET /api/albums/:id
+app.get('/api/albums/:id', function album_index(req, res) {
+  db.Album.findOne({
+    _id: req.params.id
+  }, function(err, album) {
+    console.log(album);
+    res.json(album);
+  });
+  //res.send("yup");
+});
+// POST /api/albums/:id/songs
+app.post('/api/albums/:id/songs', function album_index(req, res) {
+  db.Album.findOne({
+    _id: req.params.id
+  }, function(err, album) {
+    album.songs.push({
+      name: req.body.name,
+      trackNumber: req.body.trackNumber
+    });
+    console.log(req.params.id);
+    album.save();
+    res.json(album);
+  });
+
+  //res.send("yup");
+});
 /**********
  * SERVER *
  **********/
