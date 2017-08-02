@@ -124,12 +124,22 @@ function newAlbumError(err) {
 }
 
 function newSongSuccess(data) {
-  console.log(data);
+  console.log('NEW SONG SUCCESS ' + data._id);
+  var removedOldAlbum = $('div').find("[data-album-id=" + data._id + "]");
+
+  console.log(removedOldAlbum);
+  removedOldAlbum.remove();
+
+  renderAlbum(data);
+  $('#songName').val("");
+  $('#trackNumber').val("");
+  $('#songModal').modal('hide');
 }
 
 function newSongError(err) {
   console.log('new song error!!');
   console.log(err)
+  $('#songModal').trigger("reset");
 }
 
 function handleSuccess(data) {
